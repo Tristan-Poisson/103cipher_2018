@@ -1,1 +1,43 @@
 #!/usr/bin/env python3
+##
+## EPITECH PROJECT, 2018
+## 103_cipher
+## File description:
+## math
+##
+
+import sys
+import math
+
+def matrice_txt():
+    matrice = []
+    i = 0
+    size = len(sys.argv[1])
+    while i < size:
+        matb = [0,0,0]
+        j = 0
+        while j < 3 and i < size:
+            matb[j] = ord(sys.argv[1][i])
+            j += 1
+            i += 1
+        matrice.append(matb)
+    return(matrice)
+
+def print_matrice_txt(matrice):
+    i = 0
+    print
+    while i < len(matrice):
+        j = 0
+        while j < 3:
+            print(matrice[i][j], end = ' ')
+            j += 1
+        i += 1
+    print('')
+    return(0)
+
+def matrice_cd():
+    matrice = [3 * [0] for i in range(3)]
+    return(matrice)
+
+matrice_txt = matrice_txt()
+print_matrice_txt(matrice_txt)
