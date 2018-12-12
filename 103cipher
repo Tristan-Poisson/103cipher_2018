@@ -39,5 +39,28 @@ def matrice_cd():
     matrice = [3 * [0] for i in range(3)]
     return(matrice)
 
+def check_for_err():
+    halpmiplz = open("help", "r")
+
+    if len(sys.argv) > 1 and sys.argv[1] == "-h":
+        print(halpmiplz.read())
+        sys.exit(0)
+    elif len(sys.argv) < 4:
+        print("Nowp ! Too few arguments. Try -h for more informations.")
+        sys.exit(84)
+    elif len(sys.argv) > 4:
+        print("Nowp ! Too much arguments. Try -h for more informations.")
+
+    try:
+        flag = int(sys.argv[3])
+    except ValueError:
+        print("Nowp ! Flag error. Try -h for more informations.")
+        sys.exit(84)
+
+    if flag is not 1 and flag is not 0:
+        print("Nowp ! Flag error. Try -h for more informations.")
+        sys.exit(84)
+        
+check_for_err()
 matrice_txt = matrice_txt()
 print_matrice_txt(matrice_txt)
