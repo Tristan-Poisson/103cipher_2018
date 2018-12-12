@@ -9,34 +9,65 @@
 import sys
 import math
 
-def matrice_txt():
+def get_mat_size():
+    i = 2
+    while len(sys.argv[2]) > i * i:
+        i += 1
+    return(i)
+
+def matrice_txt(mat_size):
     matrice = []
     i = 0
     size = len(sys.argv[1])
     while i < size:
-        matb = [0,0,0]
+        matb = mat_size * [0]
         j = 0
-        while j < 3 and i < size:
+        while j < mat_size and i < size:
             matb[j] = ord(sys.argv[1][i])
             j += 1
             i += 1
         matrice.append(matb)
     return(matrice)
 
-def print_matrice_txt(matrice):
+def print_matrice_txt(matrice, mat_size):
     i = 0
-    print
+    print("Encrypted message")
     while i < len(matrice):
         j = 0
-        while j < 3:
+        while j < mat_size:
             print(matrice[i][j], end = ' ')
             j += 1
         i += 1
     print('')
     return(0)
 
-def matrice_cd():
-    matrice = [3 * [0] for i in range(3)]
+def print_matrice_cd(matrice, mat_size):
+    i = 0
+    print("Key matrix:")
+    while i < mat_size:
+        j = 0
+        while j < mat_size:
+            if matrice[i][j] < 10:
+                print(matrice[i][j], end = '       ')
+            elif 100 > matrice[i][j] >= 10:
+                print(matrice[i][j], end = '      ')
+            elif matrice[i][j] >= 100:
+                print(matrice[i][j], end = '     ')
+            j += 1
+        print("")
+        i += 1
+
+def matrice_cd(mat_size):
+    matrice = [mat_size * [0] for i in range(mat_size)]
+    i = 0
+    k = 0
+    while i < mat_size:
+        j = 0
+        while j < mat_size and k < len(sys.argv[2]):
+            matrice[i][j] = ord(sys.argv[2][k])
+            j += 1
+            k += 1
+        i += 1
     return(matrice)
 
 def check_for_err():
@@ -62,5 +93,11 @@ def check_for_err():
         sys.exit(84)
         
 check_for_err()
-matrice_txt = matrice_txt()
-print_matrice_txt(matrice_txt)
+if len(sys.argv[2]) > 1:
+    mat_size = get_mat_size()
+else:
+    mat_size = 1
+matrice_txt = matrice_txt(mat_size)
+matrice_cd = matrice_cd(mat_size)
+print_matrice_cd(matrice_cd, mat_size)
+print_matrice_txt(matrice_txt, mat_size)
