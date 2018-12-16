@@ -94,8 +94,19 @@ def check_for_err():
         print("Nowp ! Flag error. Try -h for more informations.")
         sys.exit(84)
 
-def crypte(matrcie_txt, matrice_cd, mat_size):
-    return(0)
+def crypte(matrice_txt, matrice_cd, mat_size):
+    mat_copy = [mat_size * [0] for i in range(len(matrice_txt))]
+    i = 0
+    while i < len(matrice_txt):
+        j = 0
+        while j < mat_size:
+            k = 0
+            while k < mat_size:
+                mat_copy[i][j] += (matrice_cd[k][j] * matrice_txt[i][k])
+                k += 1
+            j += 1
+        i += 1
+    return(mat_copy)
 
 check_for_err()
 if len(sys.argv[2]) > 1:
@@ -105,5 +116,5 @@ else:
 matrice_txt = matrice_txt(mat_size)
 matrice_cd = matrice_cd(mat_size)
 print_matrice_cd(matrice_cd, mat_size)
-
+matrice_txt = crypte(matrice_txt, matrice_cd, mat_size)
 print_matrice_txt(matrice_txt, mat_size)
